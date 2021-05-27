@@ -1,6 +1,7 @@
 package it.advancia.michele.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.advancia.michele.UserManagerException;
+import it.advancia.michele.entity.RisultatiCalcolatrice;
 import it.advancia.michele.entity.User;
+import it.advancia.michele.exception.OperationException;
+import it.advancia.michele.exception.UserManagerException;
+import it.advancia.michele.sessionbean.CalcolatriceEJB;
 import it.advancia.michele.sessionbean.UserManagerEJB;
 
 @WebServlet("/UserServlet")
@@ -21,6 +25,9 @@ public class UserServlet extends HttpServlet
 
 	@EJB
 	private UserManagerEJB userManager;
+	
+	@EJB
+	private CalcolatriceEJB calcolatrice;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -56,8 +63,12 @@ public class UserServlet extends HttpServlet
 				request.setAttribute("error", "Non sono consentite operazioni esterne a login o register");
 				request.getRequestDispatcher(ERROR_PAGE).forward(request, response);
 			}
+			List<RisultatiCalcolatrice> risultati = calcolatrice.getRisultati(user);
+			request.setAttribute("resultList", risultati);
 			request.getSession().setAttribute("user", user);
+			
 			request.getRequestDispatcher("loggedPage.jsp").forward(request, response);
+			//response.sendRedirect("loggedPage.jsp");
 		} catch (UserManagerException e)
 		{
 			request.setAttribute("error", e.toString());
@@ -68,5 +79,6 @@ public class UserServlet extends HttpServlet
 			e.printStackTrace();
 		}
 	}
+	
 
 }

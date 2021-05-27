@@ -3,9 +3,9 @@ package it.advancia.michele.sessionbean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 
-import it.advancia.michele.UserManagerException;
 import it.advancia.michele.entity.ListaRisultati;
 import it.advancia.michele.entity.User;
+import it.advancia.michele.exception.UserManagerException;
 import it.advancia.michele.providers.EMProvider;
 
 @Stateless

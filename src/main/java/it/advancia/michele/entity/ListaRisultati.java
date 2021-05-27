@@ -20,7 +20,7 @@ public class ListaRisultati
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToMany(mappedBy = "id", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "risultati", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(name = "operazione")
 	private List<RisultatiCalcolatrice> risultato;
 

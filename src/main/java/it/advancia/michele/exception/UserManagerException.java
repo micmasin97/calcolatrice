@@ -1,4 +1,4 @@
-package it.advancia.michele;
+package it.advancia.michele.exception;
 
 import com.sun.xml.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" session="true"%>
 <%@ page import="it.advancia.michele.entity.*"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <%
@@ -21,16 +22,39 @@ Ciao <%= user.getNome() %>
 <form action="CalculatorSerlvlet" method="POST">
 	<input type="number" name="operator1" value="<%= request.getAttribute("operator1")%>" step="0.01">
 	<select name="operation">
-		<option value="add">+</option>
-		<option value="sub">-</option>
-		<option value="mul">*</option>
-		<option value="div">/</option>
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
 	</select>
 	<input type="number" name="operator2" value="<%= request.getAttribute("operator2")%>" step="0.01">
 	<input type="submit" value="=">
 	<input disabled="disabled" value="<%= (request.getAttribute("result") == null) ? 0 : request.getAttribute("result")%>">
 	<input type="reset" value="reset">
 </form>
+Operazioni:
+<table>
+<tbody>
+<%
+	if (request.getAttribute("resultList") != null)
+	{
+		List<RisultatiCalcolatrice> risultati =	(List<RisultatiCalcolatrice>)request.getAttribute("resultList");
+		for(RisultatiCalcolatrice operazione : risultati)
+		{
+			%><tr>
+			<td><%= operazione.getA() %></td>
+			<td><%= operazione.getOperazione() %></td>
+			<td><%= operazione.getB() %></td>
+			<td>=</td>
+			<td><%= operazione.getRisultato() %></td>
+			</tr>
+			<%
+		}
+	}
+%>
+</tbody>
+</table>
+
 </body>
 <%
 }

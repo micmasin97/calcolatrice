@@ -1,7 +1,13 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page language="java" pageEncoding="UTF-8" session="true"%>
 
 <!DOCTYPE html>
 <html>
+<%
+	if(session.getAttribute("user")!=null)
+	{
+		response.sendRedirect("loggedPage.jsp");
+	}
+%>
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome page</title>

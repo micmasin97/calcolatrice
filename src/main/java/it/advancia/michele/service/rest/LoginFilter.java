@@ -1,6 +1,7 @@
 package it.advancia.michele.service.rest;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -10,7 +11,6 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import org.glassfish.jersey.internal.util.Base64;
 
 import it.advancia.michele.entity.User;
 import it.advancia.michele.providers.EMProvider;
@@ -36,7 +36,7 @@ public class LoginFilter implements ContainerRequestFilter
 			// rimuovo la stringa token(cos� da avere poi solo la parte codificata)
 			authToken = authToken.replaceFirst(AUTHORIZATION_HEADER_PREFIX, "");
 			// e la decodifico
-			String decodedString = Base64.decodeAsString(authToken);
+			String decodedString = new String(Base64.getDecoder().decode(authToken));
 			StringTokenizer tokens = new StringTokenizer(decodedString, ":");
 			String username = tokens.nextToken();
 			String password = tokens.nextToken();

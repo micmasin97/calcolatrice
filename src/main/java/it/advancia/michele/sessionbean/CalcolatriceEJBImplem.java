@@ -88,5 +88,24 @@ public class CalcolatriceEJBImplem implements CalcolatriceEJB
 		List<RisultatiCalcolatrice> risultati = q.getResultList();
 		return risultati;
 	}
+	
+	@Override
+	public List<RisultatiCalcolatrice> getRisultatiFiltrati(User user, String filtro)
+	{
+		EntityManager entityManager = EMProvider.getEntityManager();
+		Query q;
+		if(filtro.equals(""))
+		{
+			q = entityManager.createNativeQuery("select r.id, r.valore_a, r.operazione, r.valore_b, r.risultato, r.risultati_id from Risultati r join operazioni o on r.risultati_id=o.id join Utenti u on u.operazioni_id=o.id where u.username=:user","RisultatiListaUser");
+		}
+		else
+		{
+			q = entityManager.createNativeQuery("select r.id, r.valore_a, r.operazione, r.valore_b, r.risultato, r.risultati_id from Risultati r join operazioni o on r.risultati_id=o.id join Utenti u on u.operazioni_id=o.id where u.username=:user and r.operazione=:operazione","RisultatiListaUser");
+			q.setParameter("operazione", filtro);
+		}
+		q.setParameter("user", user.getUsername());
+		List<RisultatiCalcolatrice> risultati = q.getResultList();
+		return risultati;
+	}
 
 }

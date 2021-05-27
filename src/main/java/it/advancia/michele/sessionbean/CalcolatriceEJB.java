@@ -20,4 +20,6 @@ public interface CalcolatriceEJB
 	RisultatiCalcolatrice divisione(double a, double b, User user) throws OperationException;
 
 	List<RisultatiCalcolatrice> getRisultati(User user);
+	
+	List<RisultatiCalcolatrice> getRisultatiFiltrati(User user, String filtro);
 }

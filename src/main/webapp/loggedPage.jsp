@@ -28,12 +28,22 @@ Ciao <%= user.getNome() %>
 		<option value="/">/</option>
 	</select>
 	<input type="number" name="operator2" value="<%= request.getAttribute("operator2")%>" step="0.01">
-	<input type="submit" value="=">
+	<input type="submit" name="submit" value="=">
 	<input disabled="disabled" value="<%= (request.getAttribute("result") == null) ? 0 : request.getAttribute("result")%>">
 	<input type="reset" value="reset">
 </form>
 Operazioni:
 <table>
+<form action="CalculatorSerlvlet" method="POST">
+	<select name="type">
+		<option value=""></option>
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+	</select>
+	<input type="submit" name="submit" value="filter">
+</form>
 <tbody>
 <%
 	if (request.getAttribute("resultList") != null)

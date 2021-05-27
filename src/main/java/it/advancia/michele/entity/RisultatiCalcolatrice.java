@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 @Entity
@@ -17,6 +20,8 @@ import javax.persistence.Table;
 @SqlResultSetMapping(name = "RisultatiListaUser", entities =
 { @EntityResult(entityClass = RisultatiCalcolatrice.class, fields =
 { @FieldResult(name = "id", column = "id"), @FieldResult(name = "a", column = "valore_a"), @FieldResult(name = "operazione", column = "operazione"), @FieldResult(name = "b", column = "valore_b"), @FieldResult(name = "risultato", column = "risultato"), @FieldResult(name = "risultati", column = "risultati_id"), }) })
+@XmlType(propOrder =
+{ "id", "a", "operazione", "b", "risultato" })
 public class RisultatiCalcolatrice
 {
 	@Id
@@ -83,6 +88,7 @@ public class RisultatiCalcolatrice
 		this.b = b;
 	}
 
+	@XmlTransient
 	public ListaRisultati getRisultati()
 	{
 		return risultati;

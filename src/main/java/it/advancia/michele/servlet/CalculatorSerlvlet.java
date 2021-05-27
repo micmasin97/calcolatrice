@@ -38,6 +38,11 @@ public class CalculatorSerlvlet extends HttpServlet
 				request.setAttribute("result", risultato.getRisultato());
 				risultati = calcolatrice.getRisultati((User) request.getSession().getAttribute("user"));
 			}
+			else if(request.getParameter("submit").equals("delete_all"))
+			{
+				calcolatrice.clearList((User) request.getSession().getAttribute("user"));
+				risultati=null;
+			}
 			else
 			{
 				risultati = calcolatrice.getRisultatiFiltrati((User) request.getSession().getAttribute("user"),request.getParameter("type"));

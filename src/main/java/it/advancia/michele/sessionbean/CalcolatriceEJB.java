@@ -22,4 +22,6 @@ public interface CalcolatriceEJB
 	List<RisultatiCalcolatrice> getRisultati(User user);
 	
 	List<RisultatiCalcolatrice> getRisultatiFiltrati(User user, String filtro);
+
+	void clearList(User user);
 }

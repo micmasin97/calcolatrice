@@ -120,4 +120,13 @@ public class ResultsService
 			throw new HTTPException(401);
 		return calcolatrice.getRisultatiFiltrati(user, type);
 	}
+	
+	@WebMethod
+	public void clear()
+	{
+		User user = auth();
+		if(user==null)
+			throw new HTTPException(401);
+		calcolatrice.clearList(user);
+	}
 }

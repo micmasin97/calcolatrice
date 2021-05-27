@@ -108,4 +108,14 @@ public class CalcolatriceEJBImplem implements CalcolatriceEJB
 		return risultati;
 	}
 
+	@Override
+	public void clearList(User user)
+	{
+		EntityManager entityManager = EMProvider.getEntityManager();
+		Query q = entityManager.createNativeQuery("delete r from Risultati r join operazioni o on r.risultati_id=o.id join Utenti u on u.operazioni_id=o.id where u.username=:user");
+		q.setParameter("user", user.getUsername());
+		q.executeUpdate();
+		
+	}
+
 }

@@ -43,6 +43,7 @@ Operazioni:
 		<option value="/">/</option>
 	</select>
 	<input type="submit" name="submit" value="filter">
+	<input type="submit" name="submit" value="delete_all">
 </form>
 <tbody>
 <%
